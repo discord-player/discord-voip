@@ -1,7 +1,13 @@
 {
-	"extends": "../../.eslintrc.json",
+	"root": true,
+	"extends": ["neon/common", "neon/node", "neon/typescript", "neon/prettier"],
+	"parserOptions": {
+		"project": ["./tsconfig.eslint.json"]
+	},
 	"rules": {
+		"@typescript-eslint/consistent-type-definitions": ["error", "interface"],
 		"import/extensions": 0,
 		"no-restricted-globals": 0
-	}
+	},
+	"ignorePatterns": ["**/dist/*"]
 }

@@ -1,6 +1,6 @@
 import type { Readable } from 'node:stream';
-import prism from 'prism-media';
 import { FFmpeg } from '@discord-player/ffmpeg';
+import prism from 'prism-media';
 
 /**
  * This module creates a Transformer Graph to figure out what the most efficient way

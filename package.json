@@ -1,6 +1,6 @@
 {
 	"name": "discord-voip",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Implementation of the Discord Voice API for discord-player",
 	"scripts": {
 		"build": "tsup && node scripts/postbuild.mjs",
@@ -11,7 +11,7 @@
 		"fmt": "yarn format",
 		"docs": "yarn build:docs && api-extractor run --local && api-extractor run --local --config ./api-extractor-docs.json",
 		"prepack": "yarn lint && yarn test && yarn build",
-		"changelog": "git cliff --prepend ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/voice/*'",
+		"changelog": "git cliff -- ./CHANGELOG.md -u -c ./cliff.toml -r ../../ --include-path 'packages/voice/*'",
 		"release": "cliff-jumper"
 	},
 	"main": "./dist/index.js",
@@ -46,13 +46,13 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/discordjs/discord.js.git",
+		"url": "https://github.com/androzdev/discord-voip.git",
 		"directory": "packages/voice"
 	},
 	"bugs": {
-		"url": "https://github.com/discordjs/discord.js/issues"
+		"url": "https://github.com/androzdev/discord-voip/issues"
 	},
-	"homepage": "https://discord.js.org",
+	"homepage": "https://github.com/androzdev/discord-voip",
 	"dependencies": {
 		"@discord-player/ffmpeg": "^0.1.0",
 		"@types/ws": "^8.5.5",

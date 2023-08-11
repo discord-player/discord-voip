@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { resolve, dirname } from 'node:path';
-import prism from 'prism-media';
+import { FFmpeg } from '@discord-player/ffmpeg';
 
 /**
  * Tries to find the package.json file for a given module.
@@ -33,7 +33,7 @@ function findPackageJSON(
  */
 function version(name: string): string {
 	try {
-		if (name === '@discordjs/voice') {
+		if (name === 'discord-voip') {
 			return '[VI]{{inject}}[/VI]';
 		}
 
@@ -45,7 +45,7 @@ function version(name: string): string {
 }
 
 /**
- * Generates a report of the dependencies used by the \@discordjs/voice module.
+ * Generates a report of the dependencies used by the discord-voip module.
  * Useful for debugging.
  */
 export function generateDependencyReport() {
@@ -53,12 +53,13 @@ export function generateDependencyReport() {
 	const addVersion = (name: string) => report.push(`- ${name}: ${version(name)}`);
 	// general
 	report.push('Core Dependencies');
-	addVersion('@discordjs/voice');
+	addVersion('discord-voip');
 	addVersion('prism-media');
 	report.push('');
 
 	// opus
 	report.push('Opus Libraries');
+	addVersion('mediaplex');
 	addVersion('@discordjs/opus');
 	addVersion('opusscript');
 	report.push('');
@@ -74,9 +75,10 @@ export function generateDependencyReport() {
 	// ffmpeg
 	report.push('FFmpeg');
 	try {
-		const info = prism.FFmpeg.getInfo();
+		const info = FFmpeg.locate()!;
 		report.push(`- version: ${info.version}`);
-		report.push(`- libopus: ${info.output.includes('--enable-libopus') ? 'yes' : 'no'}`);
+		report.push(`- libopus: ${info.metadata!.includes('--enable-libopus') ? 'yes' : 'no'}`);
+		report.push(`- static: ${info.isStatic ? 'yes' : 'no'}`);
 	} catch {
 		report.push('- not found');
 	}

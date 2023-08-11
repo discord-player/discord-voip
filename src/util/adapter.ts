@@ -1,7 +1,7 @@
 import type { GatewayVoiceServerUpdateDispatchData, GatewayVoiceStateUpdateDispatchData } from 'discord-api-types/v10';
 
 /**
- * Methods that are provided by the \@discordjs/voice library to implementations of
+ * Methods that are provided by the discord-voip library to implementations of
  * Discord gateway DiscordGatewayAdapters.
  */
 export interface DiscordGatewayAdapterLibraryMethods {
@@ -28,7 +28,7 @@ export interface DiscordGatewayAdapterLibraryMethods {
  */
 export interface DiscordGatewayAdapterImplementerMethods {
 	/**
-	 * This will be called by \@discordjs/voice when the adapter can safely be destroyed as it will no
+	 * This will be called by discord-voip when the adapter can safely be destroyed as it will no
 	 * longer be used.
 	 */
 	destroy(): void;

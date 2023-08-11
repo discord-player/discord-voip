@@ -1,3 +1,7 @@
+/* eslint-disable unicorn/numeric-separators-style */
+
+import { Buffer } from 'node:buffer';
+
 export const RTP_PACKET_DESKTOP = {
 	ssrc: 341124,
 	packet: Buffer.from([
