@@ -1,0 +1,30 @@
+# Packages
+node_modules
+.yarn/cache
+.yarn/*.gz
+
+# Log files
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Env
+.env
+
+# Dist
+dist
+dist-docs
+
+# Docs
+docs/**/*
+!docs/README.md
+
+# Miscellaneous
+.turbo
+.tmp
+coverage
