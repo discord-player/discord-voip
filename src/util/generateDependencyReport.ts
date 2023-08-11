@@ -54,6 +54,7 @@ export function generateDependencyReport() {
 	// general
 	report.push('Core Dependencies');
 	addVersion('discord-voip');
+	addVersion('@discord-player/opus');
 	addVersion('prism-media');
 	report.push('');
 

@@ -1,5 +1,6 @@
 import type { Buffer } from 'node:buffer';
 import { pipeline, type Readable } from 'node:stream';
+import { OpusEncoder, OpusDecoder } from '@discord-player/opus';
 import prism from 'prism-media';
 import { noop } from '../util/util';
 import { SILENCE_FRAME, type AudioPlayer } from './AudioPlayer';
@@ -69,7 +70,7 @@ export class AudioResource<T = unknown> {
 	 * If using an Opus encoder to create this audio resource, then this will be a prism-media opus.Encoder.
 	 * You can use this to control settings such as bitrate, FEC, PLP.
 	 */
-	public readonly encoder?: prism.opus.Encoder;
+	public readonly encoder?: OpusEncoder;
 
 	/**
 	 * The audio player that the resource is subscribed to, if any.
@@ -105,7 +106,7 @@ export class AudioResource<T = unknown> {
 		for (const stream of streams) {
 			if (stream instanceof prism.VolumeTransformer) {
 				this.volume = stream;
-			} else if (stream instanceof prism.opus.Encoder) {
+			} else if (stream instanceof OpusEncoder) {
 				this.encoder = stream;
 			}
 		}
@@ -180,9 +181,9 @@ export function inferStreamType(stream: Readable): {
 	hasVolume: boolean;
 	streamType: StreamType;
 } {
-	if (stream instanceof prism.opus.Encoder) {
+	if (stream instanceof OpusEncoder || stream instanceof prism.opus.Encoder) {
 		return { streamType: StreamType.Opus, hasVolume: false };
-	} else if (stream instanceof prism.opus.Decoder) {
+	} else if (stream instanceof OpusDecoder || stream instanceof prism.opus.Decoder) {
 		return { streamType: StreamType.Raw, hasVolume: false };
 	} else if (stream instanceof prism.VolumeTransformer) {
 		return { streamType: StreamType.Raw, hasVolume: true };

@@ -1,6 +1,7 @@
 import { Buffer } from 'node:buffer';
 import process from 'node:process';
 import { PassThrough, Readable } from 'node:stream';
+import { OpusDecoder, OpusEncoder } from '@discord-player/opus';
 import { opus, VolumeTransformer } from 'prism-media';
 import { SILENCE_FRAME } from '../src/audio/AudioPlayer';
 import { AudioResource, createAudioResource, NO_CONSTRAINT, VOLUME_CONSTRAINT } from '../src/audio/AudioResource';
@@ -64,16 +65,30 @@ describe('createAudioResource', () => {
 	});
 
 	test('Only infers type if not explicitly given', () => {
-		const resource = createAudioResource(new opus.Encoder(), { inputType: StreamType.Arbitrary });
+		const resource = createAudioResource(
+			new OpusEncoder({
+				channels: 2,
+				frameSize: 960,
+				rate: 48_000,
+			}),
+			{ inputType: StreamType.Arbitrary },
+		);
 		expect(findPipeline).toHaveBeenCalledWith(StreamType.Arbitrary, NO_CONSTRAINT);
 		expect(resource.volume).toBeUndefined();
 	});
 
-	test('Infers from opus.Encoder', () => {
-		const resource = createAudioResource(new opus.Encoder(), { inlineVolume: true });
+	test('Infers from OpusEncoder', () => {
+		const resource = createAudioResource(
+			new OpusEncoder({
+				channels: 2,
+				frameSize: 960,
+				rate: 48_000,
+			}),
+			{ inlineVolume: true },
+		);
 		expect(findPipeline).toHaveBeenCalledWith(StreamType.Opus, VOLUME_CONSTRAINT);
 		expect(resource.volume).toBeInstanceOf(VolumeTransformer);
-		expect(resource.encoder).toBeInstanceOf(opus.Encoder);
+		expect(resource.encoder).toBeInstanceOf(OpusEncoder);
 	});
 
 	test('Infers from opus.OggDemuxer', () => {
@@ -89,8 +104,14 @@ describe('createAudioResource', () => {
 		expect(resource.volume).toBeUndefined();
 	});
 
-	test('Infers from opus.Decoder', () => {
-		const resource = createAudioResource(new opus.Decoder());
+	test('Infers from OpusDecoder', () => {
+		const resource = createAudioResource(
+			new OpusDecoder({
+				channels: 2,
+				frameSize: 960,
+				rate: 48_000,
+			}),
+		);
 		expect(findPipeline).toHaveBeenCalledWith(StreamType.Raw, NO_CONSTRAINT);
 		expect(resource.volume).toBeUndefined();
 	});

@@ -1,5 +1,6 @@
 import type { Readable } from 'node:stream';
 import { FFmpeg } from '@discord-player/ffmpeg';
+import { OpusDecoder, OpusEncoder } from '@discord-player/opus';
 import prism from 'prism-media';
 
 /**
@@ -122,14 +123,14 @@ getNode(StreamType.Raw).addEdge({
 	type: TransformerType.OpusEncoder,
 	to: getNode(StreamType.Opus),
 	cost: 1.5,
-	transformer: () => new prism.opus.Encoder({ rate: 48_000, channels: 2, frameSize: 960 }),
+	transformer: () => new OpusEncoder({ rate: 48_000, channels: 2, frameSize: 960 }),
 });
 
 getNode(StreamType.Opus).addEdge({
 	type: TransformerType.OpusDecoder,
 	to: getNode(StreamType.Raw),
 	cost: 1.5,
-	transformer: () => new prism.opus.Decoder({ rate: 48_000, channels: 2, frameSize: 960 }),
+	transformer: () => new OpusDecoder({ rate: 48_000, channels: 2, frameSize: 960 }),
 });
 
 getNode(StreamType.OggOpus).addEdge({
