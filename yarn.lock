@@ -1460,10 +1460,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discord-player/opus@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@discord-player/opus@npm:0.1.0"
-  checksum: c6711e334c42385d243947179e341e868136ec46c01400c8f78069006eee9720c4c2a93e152738fe57af03ab585a7ba17a4a4194fc1f80f739750c7dacf7dc60
+"@discord-player/opus@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@discord-player/opus@npm:0.1.2"
+  checksum: 41ceb8f64e5ee071789ca0042445664a02a62b5184b0e652f86c3851f4785c324cd2b3223791d690f6dcf33c6d0e7e5b20a88fb75781a3d96645558ec1cbcc19
   languageName: node
   linkType: hard
 
@@ -4015,7 +4015,7 @@ __metadata:
     "@babel/preset-env": ^7.22.9
     "@babel/preset-typescript": ^7.22.5
     "@discord-player/ffmpeg": ^0.1.0
-    "@discord-player/opus": ^0.1.0
+    "@discord-player/opus": ^0.1.2
     "@favware/cliff-jumper": ^2.1.1
     "@microsoft/api-extractor": ^7.36.3
     "@types/jest": ^29.5.3

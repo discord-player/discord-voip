@@ -41,6 +41,7 @@ try installing another.
 - `mediaplex`: ^0.0.2
 - `@discordjs/opus`: ^0.4.0
 - `opusscript`: ^0.0.7
+- `@evan/opus`: ^1.0.2
 
 **FFmpeg:**
 
